@@ -1,3 +1,5 @@
+%% first section.
+
 clear
 
 fileID = fopen('testbench.mem','w');
@@ -93,7 +95,7 @@ for p = 1:500
     end
 end
 
-disp(sum(abs( bit_received - bit_sent )))
+BER_ML = sum(abs( bit_received - bit_sent ))/66000;
 
 %figure(1)
 %plot(gamma)
@@ -103,7 +105,7 @@ disp(sum(abs( bit_received - bit_sent )))
 %xlabel("index of all possible x")
 %saveas(gcf,'p3_a.png')
 
-%%
+%% second section.
 
 bit_received_verilog = zeros(1,66000);
 Data_Out = readmatrix("Data_Out_SNR19.txt");
@@ -114,13 +116,6 @@ for i = 1:5500
     end
 end
 
-disp(sum(abs( bit_received_verilog - bit_sent )))
+BER_verilog = sum(abs( bit_received_verilog - bit_sent ))/66000;
 
-%%
-
-%figure(2)
-%DataOut = readmatrix("Data_Out.txt");
-%plot(DataOut(:,1));
-%[gamma2_min,gamma2_min_index] = min(DataOut(:,1));
-%x_ML_bit2 = DataOut(gamma2_min_index,2:5);
 
