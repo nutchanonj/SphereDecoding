@@ -1,0 +1,3 @@
+Time resolution is 1 ps
+WARNING: File/Multi-channel descriptor (779384948) passed to $fclose is not valid. Please compile the design with -debug for source location information.
+$finish called at time : 46800 ns : File "C:/Users/333A/Documents/MEGA/Studying/2024-Fall/Digital Comm IC/Final Project/metric_calc_tb.v" Line 111

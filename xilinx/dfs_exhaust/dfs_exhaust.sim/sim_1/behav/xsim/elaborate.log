@@ -1,0 +1,17 @@
+Vivado Simulator v2024.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2024.1/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot dfs_exhaust_tb_behav xil_defaultlib.dfs_exhaust_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "C:/Users/333A/Documents/MEGA/Studying/2024-Fall/Digital Comm IC/Final Project/dfs_exhaust.v" Line 1. Module dfs_exhaust doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/333A/Documents/MEGA/Studying/2024-Fall/Digital Comm IC/Final Project/dfs_exhaust.v" Line 1. Module dfs_exhaust doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.dfs_exhaust
+Compiling module xil_defaultlib.dfs_exhaust_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot dfs_exhaust_tb_behav
