@@ -1,0 +1,11 @@
+0.7
+2020.2
+Oct 13 2023
+20:47:58
+D:/Study/Digital Communication IC Design/SphereDecoding/abs.v,1734010363,verilog,,D:/Study/Digital Communication IC Design/SphereDecoding/dfs.v,,abs,,,,,,,,
+D:/Study/Digital Communication IC Design/SphereDecoding/dfs.v,1734510541,verilog,,D:/Study/Digital Communication IC Design/SphereDecoding/metric_calc.v,,dfs,,,,,,,,
+D:/Study/Digital Communication IC Design/SphereDecoding/metric_calc.v,1734551447,verilog,,D:/Study/Digital Communication IC Design/SphereDecoding/top.v,,PED;accum;complex_multiply,,,,,,,,
+D:/Study/Digital Communication IC Design/SphereDecoding/rs_multiplier.v,1734510548,verilog,,D:/Study/Digital Communication IC Design/SphereDecoding/top.v,,rs_multiplier,,,,,,,,
+D:/Study/Digital Communication IC Design/SphereDecoding/top.v,1734549875,verilog,,D:/Study/Digital Communication IC Design/SphereDecoding/top_tb.v,,MIMO_detector,,,,,,,,
+D:/Study/Digital Communication IC Design/SphereDecoding/top_tb.v,1734553060,verilog,,,,clk_gen;top_tb,,,,,,,,
+D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.sim/sim_1/behav/xsim/glbl.v,1734010363,verilog,,,,glbl,,,,,,,,

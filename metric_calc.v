@@ -1,140 +1,158 @@
-module metric_calc #(parameter WIDTH = 32)
-    (input  wire signed [WIDTH-1:0]      InData0_real,
-     input  wire signed [WIDTH-1:0]      InData1_real,
-     input  wire signed [WIDTH-1:0]      InData2_real,
-     input  wire signed [WIDTH-1:0]      InData3_real,
-     input  wire signed [WIDTH-1:0]      InData0_imag,
-     input  wire signed [WIDTH-1:0]      InData1_imag,
-     input  wire signed [WIDTH-1:0]      InData2_imag,
-     input  wire signed [WIDTH-1:0]      InData3_imag,
-     input  wire        [2:0]            S_0,
-     input  wire        [2:0]            S_1,
-     input  wire        [2:0]            S_2,
-     input  wire        [2:0]            S_3,
-     input  wire signed [WIDTH-1:0]      R0_real,
-     input  wire signed [WIDTH-1:0]      R1_real,
-     input  wire signed [WIDTH-1:0]      R2_real,
-     input  wire signed [WIDTH-1:0]      R3_real,
-     input  wire signed [WIDTH-1:0]      R4_real,
-     input  wire signed [WIDTH-1:0]      R5_real,
-     input  wire signed [WIDTH-1:0]      R6_real,
-     input  wire signed [WIDTH-1:0]      R7_real,
-     input  wire signed [WIDTH-1:0]      R8_real,
-     input  wire signed [WIDTH-1:0]      R9_real,
-     input  wire signed [WIDTH-1:0]      R0_imag,
-     input  wire signed [WIDTH-1:0]      R1_imag,
-     input  wire signed [WIDTH-1:0]      R2_imag,
-     input  wire signed [WIDTH-1:0]      R3_imag,
-     input  wire signed [WIDTH-1:0]      R4_imag,
-     input  wire signed [WIDTH-1:0]      R5_imag,
-     input  wire signed [WIDTH-1:0]      R6_imag,
-     input  wire signed [WIDTH-1:0]      R7_imag,
-     input  wire signed [WIDTH-1:0]      R8_imag,
-     input  wire signed [WIDTH-1:0]      R9_imag,
-     input  wire        [1:0]            current_node_lvl,
-     output reg  signed [WIDTH-1:0]      current_node_cost);
+module complex_multiply #(
+    //parameter WIDTH = 32,
+    parameter INT_W  = 6,
+    parameter FRAC_W = 10,
+    parameter WIDTH = INT_W + FRAC_W)
+(
+input  				 i_clk  ,
+input  				 i_valid,
+input  [WIDTH*2-1:0] i_in_a ,
+input  [WIDTH*2-1:0] i_in_b ,
+output [WIDTH*2-1:0] o_data ,
+output				 o_valid
+);
 
-    wire signed [WIDTH-1:0] R0S0_real;
-    wire signed [WIDTH-1:0] R1S1_real;
-    wire signed [WIDTH-1:0] R2S2_real;
-    wire signed [WIDTH-1:0] R3S3_real;
-    wire signed [WIDTH-1:0] R4S1_real;
-    wire signed [WIDTH-1:0] R5S2_real;
-    wire signed [WIDTH-1:0] R6S3_real;
-    wire signed [WIDTH-1:0] R7S2_real;
-    wire signed [WIDTH-1:0] R8S3_real;
-    wire signed [WIDTH-1:0] R9S3_real;
+function automatic [WIDTH-1:0] fx_mul;
+	input signed [WIDTH-1:0] i_data_a;
+	input signed [WIDTH-1:0] i_data_b;
 
-    wire signed [WIDTH-1:0] R0S0_imag;
-    wire signed [WIDTH-1:0] R1S1_imag;
-    wire signed [WIDTH-1:0] R2S2_imag;
-    wire signed [WIDTH-1:0] R3S3_imag;
-    wire signed [WIDTH-1:0] R4S1_imag;
-    wire signed [WIDTH-1:0] R5S2_imag;
-    wire signed [WIDTH-1:0] R6S3_imag;
-    wire signed [WIDTH-1:0] R7S2_imag;
-    wire signed [WIDTH-1:0] R8S3_imag;
-    wire signed [WIDTH-1:0] R9S3_imag;
-
-    rs_multiplier R0S0 (R0_real, R0_imag, S_0, R0S0_real, R0S0_imag);
-    defparam R0S0.WIDTH = WIDTH;
-    rs_multiplier R1S1 (R1_real, R1_imag, S_1, R1S1_real, R1S1_imag);
-    defparam R1S1.WIDTH = WIDTH;
-    rs_multiplier R2S2 (R2_real, R2_imag, S_2, R2S2_real, R2S2_imag);
-    defparam R2S2.WIDTH = WIDTH;
-    rs_multiplier R3S3 (R3_real, R3_imag, S_3, R3S3_real, R3S3_imag);
-    defparam R3S3.WIDTH = WIDTH;
-    rs_multiplier R4S1 (R4_real, R4_imag, S_1, R4S1_real, R4S1_imag);
-    defparam R4S1.WIDTH = WIDTH;
-    rs_multiplier R5S2 (R5_real, R5_imag, S_2, R5S2_real, R5S2_imag);
-    defparam R5S2.WIDTH = WIDTH;
-    rs_multiplier R6S3 (R6_real, R6_imag, S_3, R6S3_real, R6S3_imag);
-    defparam R6S3.WIDTH = WIDTH;
-    rs_multiplier R7S2 (R7_real, R7_imag, S_2, R7S2_real, R7S2_imag);
-    defparam R7S2.WIDTH = WIDTH;
-    rs_multiplier R8S3 (R8_real, R8_imag, S_3, R8S3_real, R8S3_imag);
-    defparam R8S3.WIDTH = WIDTH;
-    rs_multiplier R9S3 (R9_real, R9_imag, S_3, R9S3_real, R9S3_imag);
-    defparam R9S3.WIDTH = WIDTH;
-
-    wire signed [WIDTH-1:0] T0_real;
-    wire signed [WIDTH-1:0] T1_real;
-    wire signed [WIDTH-1:0] T2_real;
-    wire signed [WIDTH-1:0] T3_real;
-
-    wire signed [WIDTH-1:0] T0_imag;
-    wire signed [WIDTH-1:0] T1_imag;
-    wire signed [WIDTH-1:0] T2_imag;
-    wire signed [WIDTH-1:0] T3_imag;
-
-    assign T0_real = InData0_real - (R0S0_real + R1S1_real + R2S2_real + R3S3_real);
-    assign T0_imag = InData0_imag - (R0S0_imag + R1S1_imag + R2S2_imag + R3S3_imag);
-
-    assign T1_real = InData1_real - (R4S1_real + R5S2_real + R6S3_real);
-    assign T1_imag = InData1_imag - (R4S1_imag + R5S2_imag + R6S3_imag);
-
-    assign T2_real = InData2_real - (R7S2_real + R8S3_real);
-    assign T2_imag = InData2_imag - (R7S2_imag + R8S3_imag);
-
-    assign T3_real = InData3_real - R9S3_real;
-    assign T3_imag = InData3_imag - R9S3_imag;
-
-    wire [WIDTH-1:0] T0_abs;
-    wire [WIDTH-1:0] T1_abs;
-    wire [WIDTH-1:0] T2_abs;
-    wire [WIDTH-1:0] T3_abs;
-
-    abs T0 (T0_real, T0_imag, T0_abs);
-    defparam T0.WIDTH = WIDTH;
-    abs T1 (T1_real, T1_imag, T1_abs);
-    defparam T1.WIDTH = WIDTH;
-    abs T2 (T2_real, T2_imag, T2_abs);
-    defparam T2.WIDTH = WIDTH;
-    abs T3 (T3_real, T3_imag, T3_abs);
-    defparam T3.WIDTH = WIDTH;
-
-    wire [WIDTH-1:0] T0_accum;
-    wire [WIDTH-1:0] T1_accum;
-    wire [WIDTH-1:0] T2_accum;
-    wire [WIDTH-1:0] T3_accum;
-
-    assign T3_accum = T3_abs;
-    assign T2_accum = T3_accum + T2_abs;
-    assign T1_accum = T2_accum + T1_abs;
-    assign T0_accum = T1_accum + T0_abs;
-
-    always @* begin
-
-        if (current_node_lvl == 3) begin
-            current_node_cost = T3_accum;
-        end else if (current_node_lvl == 2) begin
-            current_node_cost = T2_accum;
-        end else if (current_node_lvl == 1) begin
-            current_node_cost = T1_accum;
-        end else if (current_node_lvl == 0) begin
-            current_node_cost = T0_accum;
+	reg   signed [WIDTH + 7:0]  tmp;
+	reg   signed [WIDTH - 1:0]  flip;
+	reg round;
+		
+	
+	begin
+        if (i_data_b == 0) begin // 
+			tmp = 0;
+        end else if (|i_data_b[FRAC_W-1 : 0])  begin //+- 1/sqrt(2)
+			tmp = $signed({{6{i_data_a[WIDTH-1]}}, i_data_a, 1'b0}) + $signed({i_data_a,7'd0}) + $signed({{2{i_data_a[WIDTH-1]}}, i_data_a, 5'd0}) + 
+				  $signed({{3{i_data_a[WIDTH-1]}}, i_data_a, 4'd0}) + $signed({{5{i_data_a[WIDTH-1]}}, i_data_a, 2'd0});// + (i_data_a<<0);
+		end else begin // +- 1
+			tmp = {{i_data_a[WIDTH-1]}, i_data_a, 8'b0};
         end
+		
+		flip = i_data_b[WIDTH-1] ? ~tmp[WIDTH + 7:8] + 1 : tmp[WIDTH + 7:8];
+		
+		fx_mul = flip;
+	end
+	
+endfunction
 
-    end
+reg [1:0] o_valid_r;
+reg [WIDTH-1  :0] o_real_data_r;
+reg [WIDTH-1  :0] o_imag_data_r;
+
+wire signed [WIDTH-1  :0] real_a = i_in_a[WIDTH*2-1 :WIDTH];  // 1 sign 1 bit integer 15 fractional bit
+wire signed [WIDTH-1  :0] imag_a = i_in_a[WIDTH-1:0];         // 1 sign 1 bit integer 15 fractional bit
+wire signed [WIDTH-1  :0] real_b = i_in_b[WIDTH*2-1 :WIDTH];  // 1 sign 1 bit integer 15 fractional bit
+wire signed [WIDTH-1  :0] imag_b = i_in_b[WIDTH-1:0];         // 1 sign 1 bit integer 15 fractional bit
+
+wire signed [WIDTH*2-1:0] mult_ac = fx_mul(real_a, real_b);          // 2 sign 2 bit integer 30 fractional bit
+wire signed [WIDTH*2-1:0] mult_bd = fx_mul(imag_a, imag_b);          // 2 sign 2 bit integer 30 fractional bit
+wire signed [WIDTH*2-1:0] mult_ad = fx_mul(real_a, imag_b);          // 2 sign 2 bit integer 30 fractional bit
+wire signed [WIDTH*2-1:0] mult_bc = fx_mul(imag_a, real_b);          // 2 sign 2 bit integer 30 fractional bit
+
+reg signed [WIDTH*2-1:0] mult_ac_r;
+reg signed [WIDTH*2-1:0] mult_bd_r;
+reg signed [WIDTH*2-1:0] mult_ad_r;
+reg signed [WIDTH*2-1:0] mult_bc_r;
+
+always@ (posedge i_clk) begin
+	o_real_data_r <= o_valid_r[0] ? $signed(mult_ac_r) - $signed(mult_bd_r) : o_real_data_r;  // 1 sign 2 bit integer 30 fractional bit 
+	o_imag_data_r <= o_valid_r[0] ? $signed(mult_ad_r) + $signed(mult_bc_r) : o_imag_data_r;  // 1 sign 2 bit integer 30 fractional bit
+	o_valid_r     <= {o_valid_r[0], i_valid};
+	mult_ac_r     <= mult_ac;
+	mult_bd_r     <= mult_bd;
+	mult_ad_r     <= mult_ad;
+	mult_bc_r     <= mult_bc;
+end
+
+assign o_data = {o_real_data_r, o_imag_data_r};
+assign o_valid = o_valid_r[1];
+
+endmodule
+
+
+module accum#(     //parameter WIDTH = 32,
+	parameter INT_W  = 6,
+    parameter FRAC_W = 10,
+    parameter WIDTH = INT_W + FRAC_W)
+(
+input  				          i_clk  ,
+input  				          i_valid,
+input  [WIDTH*2-1:0]          i_in_a ,
+input  [WIDTH*2-1:0]          i_in_b ,
+input  [WIDTH*2-1:0]          i_in_c ,
+input  [WIDTH*2-1:0]          i_in_d ,
+output [WIDTH*2-1:0]          o_data ,
+output				          o_valid
+);
+
+
+wire signed [WIDTH-1:0] real_a = i_in_a[WIDTH*2-1: WIDTH]; 
+wire signed [WIDTH-1:0] imag_a = i_in_a[WIDTH-1 :0];
+wire signed [WIDTH-1:0] real_b = i_in_b[WIDTH*2-1: WIDTH]; 
+wire signed [WIDTH-1:0] imag_b = i_in_b[WIDTH-1 :0];
+
+wire signed [WIDTH-1:0] real_c = i_in_c[WIDTH*2-1: WIDTH]; 
+wire signed [WIDTH-1:0] imag_c = i_in_c[WIDTH-1 :0];
+wire signed [WIDTH-1:0] real_d = i_in_d[WIDTH*2-1: WIDTH]; 
+wire signed [WIDTH-1:0] imag_d = i_in_d[WIDTH-1 :0];
+
+wire signed [WIDTH+1:0] sum_real = $signed({{2{real_a[WIDTH-1]}}, real_a}) + $signed({{2{real_b[WIDTH-1]}}, real_b}) + $signed({{2{real_c[WIDTH-1]}}, real_c}) + $signed({{2{real_d[WIDTH-1]}}, real_d});
+wire signed [WIDTH+1:0] sum_imag = $signed({{2{imag_a[WIDTH-1]}}, imag_a}) + $signed({{2{imag_b[WIDTH-1]}}, imag_b}) + $signed({{2{imag_c[WIDTH-1]}}, imag_c}) + $signed({{2{imag_d[WIDTH-1]}}, imag_d});
+
+
+reg [WIDTH*2-1:0]       o_data_r;
+reg				        o_valid_r;
+
+
+always@ (posedge i_clk) begin
+	o_data_r      <= i_valid ? {sum_real[WIDTH-1:0], sum_imag[WIDTH-1:0]} : o_data_r;  // 1 sign 3 bit integer 30 fractional bit
+	o_valid_r     <= i_valid;
+end
+
+assign o_data  = o_data_r;
+assign o_valid = o_valid_r;
+
+endmodule
+
+module PED#(     //parameter WIDTH = 32,
+	parameter INT_W  = 6,
+    parameter FRAC_W = 10,
+    parameter WIDTH = INT_W + FRAC_W)
+(
+	input  i_clk  ,
+	input  i_valid,
+	input [WIDTH*2-1:0]  i_in_a , // current distance
+	input [WIDTH*2-1:0]  i_in_b ,
+	output[WIDTH*2-1:0]  o_data ,
+	output o_valid
+);
+reg [WIDTH*2-1:0]       o_data_r;
+reg	[2:0]               o_valid_r;
+
+wire signed [WIDTH-1:0] real_a = i_in_a[WIDTH*2-1: WIDTH]; 
+wire signed [WIDTH-1:0] imag_a = i_in_a[WIDTH-1 :0];
+
+wire signed [WIDTH-1:0] real_b = i_in_b[WIDTH*2-1: WIDTH]; 
+wire signed [WIDTH-1:0] imag_b = i_in_b[WIDTH-1 :0];
+
+wire signed [WIDTH:0] sum_real = $signed({{1{real_a[WIDTH-1]}}, real_a}) - $signed({{1{real_b[WIDTH-1]}}, real_b});
+wire signed [WIDTH:0] sum_imag = $signed({{1{imag_a[WIDTH-1]}}, imag_a}) - $signed({{1{imag_b[WIDTH-1]}}, imag_b});
+
+wire signed [WIDTH*2-1:0] real_square = $signed((o_data_r[WIDTH*2-1:WIDTH]))* $signed((o_data_r[WIDTH*2-1:WIDTH])) ;//+ (o_data_r[WIDTH-1:0])*(o_data_r[WIDTH-1:0]) ;
+wire signed [WIDTH*2-1:0] imag_square = $signed((o_data_r[WIDTH-1:0]))* $signed((o_data_r[WIDTH-1:0])) ;//+ (o_data_r[WIDTH-1:0])*(o_data_r[WIDTH-1:0]) ;
+
+wire signed [WIDTH*2-1:0] abs_square  = real_square + imag_square;
+
+
+always@ (posedge i_clk) begin
+	o_data_r      <= i_valid ? {sum_real[WIDTH-1:0], sum_imag[WIDTH-1:0]} : (o_valid_r[1] ? abs_square[WIDTH*2-INT_W - 1 -:WIDTH] : o_data_r);  // 1 sign 3 bit integer 30 fractional bit
+	o_valid_r     <= {o_valid_r[1:0], i_valid};
+end
+
+assign o_data  = o_data_r;
+assign o_valid = o_valid_r[2];
 
 endmodule

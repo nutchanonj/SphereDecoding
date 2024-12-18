@@ -1,91 +1,196 @@
-`timescale 1ns/1ps
+/********************************************************************
+* Filename: testbench_mod_add.v
+* Authors:
+*     Khoa Tran
+* Description:
+*     testbench for modular addition/substraction
+* Parameters:
+*
+* Note:
+*
+* Review History:
+*     2024.12.05             Khoa Tran
+*********************************************************************/
 
-module top_tb ();
+`timescale 1ns/10ps
+`define PERIOD    5.0
+`define MAX_CYCLE 100000
+`define RST_DELAY 2.0
 
-    parameter                 WIDTH_tb = 32;
-    reg                       Clk_tb;
-    reg                       Reset_tb;
-    reg                       flagChannelorData_tb;
-    reg  [(WIDTH_tb*4*2)-1:0] InData_tb;
-    wire [(3*4)-1:0]          OutData_tb;
-    wire                      OutputReady_tb; // using 1 when the output is ready to be sent.
+`define IDATA  "data_I.dat"
+`define ODATA  "../00_TESTBED/pattern/data_O.dat"
+`define PAT_LEN 15 
 
-    top DUT (Clk_tb, Reset_tb, flagChannelorData_tb, InData_tb, OutData_tb, OutputReady_tb);
-    defparam DUT.WIDTH = WIDTH_tb;
 
-    integer ord; // to track the input data. 
-    // 0,1 = Reset
-    // 2,3,4 = sending R
-    // 5,6,...,15 = sending y
+module top_tb  #(
+    parameter INST_W = 1,
+    parameter INT_W  = 6,
+    parameter FRAC_W = 10,
+    parameter I_WIDTH = INT_W + FRAC_W
+) ();
 
-    integer capture;
+    // Ports
+    wire              clk;
+    wire              rst_n;
+    reg               in_valid;
+    reg  [0:0]        inst;
+    reg  [(I_WIDTH*4*2)-1:0]     idata_a;
 
-    integer FILE;
-    
-    reg [255:0] rommemory [0:6999];
 
-    integer k;
+    wire              busy;
+    wire              out_valid;
+	wire              out_in_ready;
+    wire [(12)-1:0]     odata;
+
+    // TB variables
+    reg  [(I_WIDTH*4*2)  :0]    input_data  [0:`PAT_LEN-1];
+    //reg  [(I_WIDTH*4*2)-1:0]    golden_data [0:`PAT_LEN-1];
+
+    integer input_end, output_end, test_end;
+    integer i, j, k;
+    integer correct, error, cycle_count;
+	integer FILE;
     initial begin
-        FILE = $fopen("Data_Out.txt");
-        Reset_tb = 1'b0; Clk_tb = 1'b0; flagChannelorData_tb = 1; ord = 0; k = 0; capture = 0;
-        $readmemh("testbench.mem", rommemory);
+        $readmemb(`IDATA, input_data);
+		FILE = $fopen("Data_Out.txt");
+        //$readmemb(`ODATA, golden_data);
     end
 
-    integer i;
-    always begin
-        #5  Clk_tb = ~Clk_tb;
-        #5  Clk_tb = ~Clk_tb;
-    end
+    clk_gen u_clk_gen (
+        .clk   (clk  ),
+        .rst   (rst  ),
+        .rst_n (rst_n)
+    );
+	
+	MIMO_detector MIMO_detector_inst (
+		.Clk              (clk),
+		.Reset            (rst),
+		.i_in_valid       (in_valid),
+		.flagChannelorData(inst),
+		.InData           (idata_a),
+		.OutData          (odata),
+		.o_in_ready       (out_in_ready),
+		.OutputReady      (out_valid)
+	);
 
-    always @(negedge Clk_tb) begin
-        if (ord == 0) begin
-            Reset_tb <= 0;
-            flagChannelorData_tb <= 1;
-            ord <= 1; 
-        end else if (ord == 1) begin
-            Reset_tb <= 1;
-            flagChannelorData_tb <= 1;
-            ord <= 2;
-            if (k == 7000) begin
-                $finish;
-            end 
-            InData_tb <= rommemory[k]; k = k+1;
-        end else if (ord == 2) begin
-            Reset_tb <= 1;
-            flagChannelorData_tb <= 1;
-            ord <= 3;
-            InData_tb <= rommemory[k]; k = k+1;
-        end else if (ord == 3) begin
-            Reset_tb <= 1;
-            flagChannelorData_tb <= 1;
-            ord <= 4;
-            InData_tb <= rommemory[k]; k = k+1;
-        end else if (ord == 4) begin
-            Reset_tb <= 1;
-            flagChannelorData_tb <= 0;
-            ord <= 5;
-            InData_tb <= rommemory[k]; k = k+1;
-        end else if ((ord >= 5) && (ord < 15)) begin
-            if (OutputReady_tb == 1) begin
-                capture <= 1;
-                InData_tb <= rommemory[k]; k = k+1;
-                ord <= ord + 1;
-            end
-        end else if (ord == 15) begin
-            if (OutputReady_tb == 1) begin
-                capture <= 1;
-                ord <= 0;
-            end
+    // Input
+    initial begin
+        input_end = 0;
+
+        // reset
+        wait (rst === 1'b1);
+        in_valid =  1'b0;
+        idata_a  = 255'd0;
+        wait (rst === 1'b0);
+
+        // start
+		// loop
+        i = 0; j = 0;
+        @(negedge clk);
+        while ( j <= `PAT_LEN) begin
+            @(negedge clk);
+			if (out_in_ready) begin
+			 //#(`PERIOD/2);
+				in_valid = 1'b1;
+				inst     = input_data[j][(I_WIDTH*4*2)];
+				idata_a  = input_data[j][(I_WIDTH*4*2) -1:0];
+				j = j+1;
+				//$display("o valid");
+			end else begin
+			    #(`PERIOD/2);
+				in_valid = 1'b0;
+			end
         end
 
+        // final
+        @(negedge clk);
+        //#(`PERIOD/2);
+        idata_a  = 0;
+        inst     = 0;
+        in_valid = 1'b0;
     end
 
+    // Output
+    initial begin
+        correct = 0;
+        error   = 0;
+        output_end = 0;
 
-    always @(negedge Clk_tb) begin
-        if (capture == 1) begin
-            $fdisplay(FILE, "%12b", OutData_tb); // save output 
-            capture <= 0;
-        end 
+        // reset
+        wait (rst === 1'b1);
+        wait (rst === 1'b0);
+
+        // start
+        @(posedge clk);
+
+        // loop
+        k = 0;
+        while (k < `PAT_LEN - 4) begin
+            @(negedge clk);
+            if (out_valid) begin
+                $fdisplay(FILE, "%b", odata); // save output 
+				$display(
+					"Test[%d]: Data out=%d %d %d %d ",
+					k,
+					odata[11:9], odata[8:6], odata[5:3], odata[2:0]
+				);
+                k = k+1;
+            end
+            @(negedge clk);
+        end
+
+        // final
+        output_end = 1;
+    end
+	initial begin
+        cycle_count = 0;
+        wait (rst === 1'b1);
+        wait (rst === 1'b0);
+
+        while (1) begin
+            @(posedge clk);
+            cycle_count = cycle_count + 1;
+        end
+    end
+    // Result
+    initial begin
+        wait (k === `PAT_LEN - 4);
+
+        if (error === 0 && k === `PAT_LEN - 4) begin
+            $display("----------------------------------------------");
+            $display("-                 ALL PASS!                  -");
+            $display("----------------------------------------------");
+			
+        end
+        else begin
+            $display("----------------------------------------------");
+            $display("  Wrong! Total Error: %d                      ", error);
+            $display("----------------------------------------------");
+        end
+		$display("Simulation Cycle: %6d, Time: %11.2f ns", cycle_count, `PERIOD*(cycle_count));
+        # (2 * `PERIOD);
+        $fclose(FILE);
+        $finish;
+    end
+
+endmodule
+
+
+module clk_gen (
+    output reg clk,
+    output reg rst,
+    output reg rst_n
+);
+
+    always #(`PERIOD / 2.0) clk = ~clk;
+
+    initial begin
+        clk = 1'b0;
+        rst = 1'b0; rst_n = 1'b1; #(              0.25  * `PERIOD);
+        rst = 1'b1; rst_n = 1'b0; #((`RST_DELAY - 0.25) * `PERIOD);
+        rst = 1'b0; rst_n = 1'b1; #(         `MAX_CYCLE * `PERIOD);
+        $display("Error! Runtime exceeded!");
+        $finish;
     end
 
 endmodule

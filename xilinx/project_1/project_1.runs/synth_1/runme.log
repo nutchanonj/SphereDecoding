@@ -1,0 +1,443 @@
+
+*** Running vivado
+    with args -log MIMO_detector.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source MIMO_detector.tcl
+
+
+
+****** Vivado v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source MIMO_detector.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental {D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/utils_1/imports/synth_1/top.dcp}
+INFO: [Vivado 12-5825] Read reference checkpoint from D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/utils_1/imports/synth_1/top.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top MIMO_detector -part xc7z010clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010'
+INFO: [Device 21-403] Loading part xc7z010clg400-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 16312
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1403.234 ; gain = 440.438
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'MIMO_detector' [D:/Study/Digital Communication IC Design/SphereDecoding/top.v:1]
+INFO: [Synth 8-6157] synthesizing module 'complex_multiply' [D:/Study/Digital Communication IC Design/SphereDecoding/metric_calc.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'complex_multiply' (0#1) [D:/Study/Digital Communication IC Design/SphereDecoding/metric_calc.v:1]
+INFO: [Synth 8-6157] synthesizing module 'accum' [D:/Study/Digital Communication IC Design/SphereDecoding/metric_calc.v:76]
+INFO: [Synth 8-6155] done synthesizing module 'accum' (0#1) [D:/Study/Digital Communication IC Design/SphereDecoding/metric_calc.v:76]
+INFO: [Synth 8-6157] synthesizing module 'PED' [D:/Study/Digital Communication IC Design/SphereDecoding/metric_calc.v:120]
+INFO: [Synth 8-6155] done synthesizing module 'PED' (0#1) [D:/Study/Digital Communication IC Design/SphereDecoding/metric_calc.v:120]
+INFO: [Synth 8-6155] done synthesizing module 'MIMO_detector' (0#1) [D:/Study/Digital Communication IC Design/SphereDecoding/top.v:1]
+WARNING: [Synth 8-3848] Net checking_w[4] in module/entity MIMO_detector does not have driver. [D:/Study/Digital Communication IC Design/SphereDecoding/top.v:61]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1516.098 ; gain = 553.301
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1516.098 ; gain = 553.301
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1516.098 ; gain = 553.301
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.024 . Memory (MB): peak = 1516.098 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc]
+WARNING: [Vivado 12-584] No ports matched 'InData[128]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[129]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[130]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[131]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[132]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[133]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[134]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[135]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[136]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[137]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[138]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[139]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[140]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[141]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[142]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[143]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[144]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[145]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[146]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[147]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[148]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[149]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[150]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[151]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[152]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[153]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[154]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[155]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[156]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[157]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[158]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[159]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[160]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[161]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[162]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[163]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[164]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[165]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[166]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[167]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[168]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[169]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[170]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[171]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[172]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[173]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[174]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[175]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[176]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[177]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[178]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[179]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[180]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[181]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[182]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[183]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[184]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[185]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[186]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[187]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[188]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[189]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[190]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[191]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[192]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[193]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[194]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[195]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[196]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[197]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[198]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[199]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[200]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[201]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[202]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[203]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[204]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[205]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[206]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[207]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[208]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[209]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[210]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[211]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[212]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[213]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[214]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[215]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[216]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[217]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[218]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[219]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[220]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[221]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[222]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[223]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[224]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[225]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[226]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+WARNING: [Vivado 12-584] No ports matched 'InData[227]'. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+INFO: [Common 17-14] Message 'Vivado 12-584' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings. [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc:2]
+Finished Parsing XDC File [D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.srcs/constrs_1/new/top.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1612.664 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+The system cannot find the path specified.
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1612.664 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z010clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'curr_state_reg' in module 'MIMO_detector'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   S_RST |                     000000010000 |                             0000
+              S_INPUT_R0 |                     001000000000 |                             0001
+              S_INPUT_R1 |                     000000001000 |                             0010
+              S_INPUT_R2 |                     000000000001 |                             0011
+              S_INPUT_R3 |                     000000000010 |                             0100
+               S_INPUT_Y |                     000000000100 |                             0101
+             S_DFS_VISIT |                     010000000000 |                             0111
+    S_DFS_TRANVERSE_DONE |                     000001000000 |                             1011
+                S_OUTPUT |                     000000100000 |                             1100
+             S_DFS_ENTRY |                     000100000000 |                             0110
+           S_DFS_COMPUTE |                     100000000000 |                             1000
+           S_DFS_COMPARE |                     000010000000 |                             1010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'curr_state_reg' using encoding 'one-hot' in module 'MIMO_detector'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   5 Input   24 Bit       Adders := 8     
+	   2 Input   17 Bit       Adders := 4     
+	   2 Input   16 Bit       Adders := 20    
+	   3 Input   16 Bit       Adders := 6     
+	   4 Input   16 Bit       Adders := 2     
+	   2 Input    4 Bit       Adders := 4     
+	   2 Input    3 Bit       Adders := 2     
++---Registers : 
+	              128 Bit    Registers := 5     
+	               32 Bit    Registers := 11    
+	               17 Bit    Registers := 6     
+	               16 Bit    Registers := 24    
+	               12 Bit    Registers := 1     
+	                4 Bit    Registers := 5     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 4     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   4 Input   96 Bit        Muxes := 1     
+	   4 Input   64 Bit        Muxes := 1     
+	   3 Input   32 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 5     
+	   4 Input   32 Bit        Muxes := 2     
+	   8 Input   32 Bit        Muxes := 4     
+	   2 Input   24 Bit        Muxes := 32    
+	   3 Input   17 Bit        Muxes := 6     
+	   2 Input   16 Bit        Muxes := 16    
+	  12 Input   12 Bit        Muxes := 1     
+	   2 Input   12 Bit        Muxes := 9     
+	   2 Input    4 Bit        Muxes := 10    
+	   3 Input    4 Bit        Muxes := 4     
+	  12 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 1     
+	   4 Input    3 Bit        Muxes := 1     
+	   8 Input    3 Bit        Muxes := 4     
+	   2 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 18    
+	   3 Input    1 Bit        Muxes := 10    
+	   4 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 80 (col length:40)
+BRAMs: 120 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP real_square, operation Mode is: A*B.
+DSP Report: operator real_square is absorbed into DSP real_square.
+DSP Report: Generating DSP abs_square, operation Mode is: C+A*B.
+DSP Report: operator abs_square is absorbed into DSP abs_square.
+DSP Report: operator imag_square is absorbed into DSP abs_square.
+WARNING: [Synth 8-3936] Found unconnected internal register 'R_buffer_r_reg[0]' and it is trimmed from '128' to '96' bits. [D:/Study/Digital Communication IC Design/SphereDecoding/top.v:125]
+WARNING: [Synth 8-3936] Found unconnected internal register 'R_buffer_r_reg[1]' and it is trimmed from '128' to '96' bits. [D:/Study/Digital Communication IC Design/SphereDecoding/top.v:125]
+WARNING: [Synth 8-3936] Found unconnected internal register 'R_buffer_r_reg[2]' and it is trimmed from '128' to '96' bits. [D:/Study/Digital Communication IC Design/SphereDecoding/top.v:125]
+WARNING: [Synth 8-3936] Found unconnected internal register 'R_buffer_r_reg[3]' and it is trimmed from '128' to '96' bits. [D:/Study/Digital Communication IC Design/SphereDecoding/top.v:125]
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:21 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+ Sort Area is  abs_square_2 : 0 0 : 2014 2014 : Used 1 time 0
+ Sort Area is  real_square_0 : 0 0 : 1937 1937 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|PED         | A*B         | 16     | 16     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PED         | C+A*B       | 16     | 16     | 26     | -      | 26     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:28 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:28 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:21 ; elapsed = 00:00:29 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:33 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:33 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:33 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:33 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:33 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:33 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Dynamic Shift Register Report:
++------------+-------------------+--------+------------+--------+---------+--------+--------+--------+
+|Module Name | RTL Name          | Length | Data Width | SRL16E | SRLC32E | Mux F7 | Mux F8 | Mux F9 | 
++------------+-------------------+--------+------------+--------+---------+--------+--------+--------+
+|dsrl        | R_buffer_r_reg[0] | 128    | 128        | 128    | 0       | 0      | 0      | 0      | 
+|dsrl__1     | R_buffer_r_reg[0] | 96     | 96         | 96     | 0       | 0      | 0      | 0      | 
++------------+-------------------+--------+------------+--------+---------+--------+--------+--------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|PED         | (A*B)'      | 30     | 18     | -      | -      | 32     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|PED         | C+A'*B'     | 30     | 18     | 48     | -      | 26     | 1    | 1    | 1    | -    | -     | 0    | 0    | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |BUFG    |     1|
+|2     |CARRY4  |   223|
+|3     |DSP48E1 |     2|
+|5     |LUT1    |    24|
+|6     |LUT2    |   307|
+|7     |LUT3    |   353|
+|8     |LUT4    |   138|
+|9     |LUT5    |   400|
+|10    |LUT6    |   572|
+|11    |SRL16E  |    64|
+|12    |FDCE    |   112|
+|13    |FDPE    |     1|
+|14    |FDRE    |  1037|
+|15    |FDSE    |    17|
+|16    |IBUF    |   132|
+|17    |OBUF    |    14|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:33 . Memory (MB): peak = 1612.664 ; gain = 649.867
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 5 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:32 . Memory (MB): peak = 1612.664 ; gain = 553.301
+Synthesis Optimization Complete : Time (s): cpu = 00:00:24 ; elapsed = 00:00:33 . Memory (MB): peak = 1612.664 ; gain = 649.867
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.028 . Memory (MB): peak = 1612.664 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 225 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1618.137 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+The system cannot find the path specified.
+Synth Design complete | Checksum: 2c84b10
+INFO: [Common 17-83] Releasing license: Synthesis
+31 Infos, 106 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:38 . Memory (MB): peak = 1618.137 ; gain = 1048.848
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1618.137 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.runs/synth_1/MIMO_detector.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file MIMO_detector_utilization_synth.rpt -pb MIMO_detector_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Dec 19 03:44:29 2024...
