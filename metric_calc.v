@@ -1,4 +1,4 @@
-module metric_calc #(parameter WIDTH = 32)
+module metric_calc #(parameter WIDTH = 20)
     (input  wire signed [WIDTH-1:0]      InData0_real,
      input  wire signed [WIDTH-1:0]      InData1_real,
      input  wire signed [WIDTH-1:0]      InData2_real,

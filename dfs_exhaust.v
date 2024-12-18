@@ -1,4 +1,4 @@
-module dfs_exhaust #(parameter WIDTH = 32) // Note that this module do an exhaustive depth-first search.
+module dfs_exhaust #(parameter WIDTH = 20) // Note that this module do an exhaustive depth-first search.
     (input  wire                            Clk,
      input  wire                            Reset,
      output wire        [2:0]               OutData0,

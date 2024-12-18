@@ -4,13 +4,13 @@ clear
 
 fileID = fopen('testbench.mem','w');
 rng(1)
-H_num = 2000;
+H_num = 1000;
 bit_sent = randi([0 1],1,12*11*H_num);
 bit_received_ML = zeros(1,12*11*H_num);
 bit_received_DFS = zeros(1,12*11*H_num);
 bit_received_DFS_fix = zeros(1,12*11*H_num);
 bit_numbers = 8;
-snr = 19;
+snr = 17;
 
 for p = 1:H_num
     rng(p)
@@ -288,7 +288,7 @@ disp(BER_DFS_fix)
 %% second section.
 
 bit_received_verilog = zeros(1,(12*11*H_num));
-Data_Out = readmatrix("Data_Out_SNR19.txt");
+Data_Out = readmatrix("Data_Out_SNR16.txt");
 for i = 1:(11*H_num)
     for j = 1:12
         bit_received_verilog(12*(i-1)+12+1-j) = mod(Data_Out(i),10);

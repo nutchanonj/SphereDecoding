@@ -1,4 +1,4 @@
-module rs_multiplier #(parameter WIDTH = 32)
+module rs_multiplier #(parameter WIDTH = 20)
     (input  wire signed [WIDTH-1:0]      R_real,
      input  wire signed [WIDTH-1:0]      R_imag,
      input  wire        [2:0]            S,

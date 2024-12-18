@@ -1,4 +1,4 @@
-module dfs #(parameter WIDTH = 32) // Note that this module do an exhaustive depth-first search.
+module dfs #(parameter WIDTH = 20) // Note that this module do an exhaustive depth-first search.
     (input  wire                            Clk,
      input  wire                            Reset,
      input  wire        [WIDTH-1:0]         current_node_cost,      

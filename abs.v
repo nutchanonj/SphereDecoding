@@ -1,4 +1,4 @@
-module abs #(parameter WIDTH = 32)
+module abs #(parameter WIDTH = 20)
     (input  wire signed [WIDTH-1:0]  In_real,
      input  wire signed [WIDTH-1:0]  In_imag,
      output wire        [WIDTH-1:0]  Out);

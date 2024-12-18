@@ -56,7 +56,7 @@ module metric_calc_tb ();
     dfs DUT_dfs (Clk_tb, Reset_tb, current_node_cost_tb, S_0_tb, S_1_tb, S_2_tb, S_3_tb, OutputReady_tb, S_0_best_tb, S_1_best_tb, S_2_best_tb, S_3_best_tb, current_node_lvl_tb);
     defparam DUT_dfs.WIDTH = WIDTH_tb;
 
-    // This should detect 5,2,3,8 (4,1,2,7) (if we count the point counter-clockwise from the (1,0)!)
+    // This should detect 5,2,3,8 (4,1,2,7)
 
     integer               FILE;
 

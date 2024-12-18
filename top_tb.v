@@ -2,7 +2,7 @@
 
 module top_tb ();
 
-    parameter                 WIDTH_tb = 32;
+    parameter                 WIDTH_tb = 20;
     reg                       Clk_tb;
     reg                       Reset_tb;
     reg                       flagChannelorData_tb;
@@ -22,7 +22,9 @@ module top_tb ();
 
     integer FILE;
     
-    reg [255:0] rommemory [0:6999];
+    parameter length = 2000;
+    
+    reg [255:0] rommemory [0:(14*length)-1];
 
     integer k;
     integer i;
@@ -49,7 +51,7 @@ module top_tb ();
                 Reset_tb <= 1;
                 flagChannelorData_tb <= 1;
                 ord <= 2;
-                if (k == 7000) begin
+                if (k == (14*length)) begin
                     $finish;
                 end 
                 InData_tb <= rommemory[k]; k = k+1;

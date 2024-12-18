@@ -1,4 +1,4 @@
-module top #(parameter WIDTH = 32)
+module top #(parameter WIDTH = 20)
     (input  wire                            Clk,
      input  wire                            Reset,
      input  wire                            flagChannelorData,
