@@ -11,7 +11,7 @@ module top_tb ();
     wire                      OutputReady_tb; // using 1 when the output is ready to be sent.
 
     top DUT (Clk_tb, Reset_tb, flagChannelorData_tb, InData_tb, OutData_tb, OutputReady_tb);
-    defparam DUT.WIDTH = WIDTH_tb;
+    // defparam DUT.WIDTH = WIDTH_tb;
 
     integer ord; // to track the input data. 
     // 0,1 = Reset
@@ -25,59 +25,63 @@ module top_tb ();
     reg [255:0] rommemory [0:6999];
 
     integer k;
+    integer i;
     initial begin
         FILE = $fopen("Data_Out.txt");
-        Reset_tb = 1'b0; Clk_tb = 1'b0; flagChannelorData_tb = 1; ord = 0; k = 0; capture = 0;
+        Reset_tb = 1'b0; Clk_tb = 1'b0; flagChannelorData_tb = 1; ord = 0; k = 0; capture = 0; i = 0;
         $readmemh("testbench.mem", rommemory);
     end
 
-    integer i;
     always begin
-        #5  Clk_tb = ~Clk_tb;
-        #5  Clk_tb = ~Clk_tb;
+        #12.5  Clk_tb = ~Clk_tb;
+        #12.5  Clk_tb = ~Clk_tb;
+        i = i+1;
     end
 
-    always @(negedge Clk_tb) begin
-        if (ord == 0) begin
-            Reset_tb <= 0;
-            flagChannelorData_tb <= 1;
-            ord <= 1; 
-        end else if (ord == 1) begin
-            Reset_tb <= 1;
-            flagChannelorData_tb <= 1;
-            ord <= 2;
-            if (k == 7000) begin
-                $finish;
-            end 
-            InData_tb <= rommemory[k]; k = k+1;
-        end else if (ord == 2) begin
-            Reset_tb <= 1;
-            flagChannelorData_tb <= 1;
-            ord <= 3;
-            InData_tb <= rommemory[k]; k = k+1;
-        end else if (ord == 3) begin
-            Reset_tb <= 1;
-            flagChannelorData_tb <= 1;
-            ord <= 4;
-            InData_tb <= rommemory[k]; k = k+1;
-        end else if (ord == 4) begin
-            Reset_tb <= 1;
-            flagChannelorData_tb <= 0;
-            ord <= 5;
-            InData_tb <= rommemory[k]; k = k+1;
-        end else if ((ord >= 5) && (ord < 15)) begin
-            if (OutputReady_tb == 1) begin
-                capture <= 1;
+    always @(negedge Clk_tb) begin // NOTE that in post-synthesis simulation, all registers in VIVADO will be applied by RESET signal for the first 100 ns.
+
+        if (i > 10) begin
+            if (ord == 0) begin
+                Reset_tb <= 0;
+                flagChannelorData_tb <= 1;
+                ord <= 1; 
+            end else if (ord == 1) begin
+                Reset_tb <= 1;
+                flagChannelorData_tb <= 1;
+                ord <= 2;
+                if (k == 7000) begin
+                    $finish;
+                end 
                 InData_tb <= rommemory[k]; k = k+1;
-                ord <= ord + 1;
-            end
-        end else if (ord == 15) begin
-            if (OutputReady_tb == 1) begin
-                capture <= 1;
-                ord <= 0;
+            end else if (ord == 2) begin
+                Reset_tb <= 1;
+                flagChannelorData_tb <= 1;
+                ord <= 3;
+                InData_tb <= rommemory[k]; k = k+1;
+            end else if (ord == 3) begin
+                Reset_tb <= 1;
+                flagChannelorData_tb <= 1;
+                ord <= 4;
+                InData_tb <= rommemory[k]; k = k+1;
+            end else if (ord == 4) begin
+                Reset_tb <= 1;
+                flagChannelorData_tb <= 0;
+                ord <= 5;
+                InData_tb <= rommemory[k]; k = k+1;
+            end else if ((ord >= 5) && (ord < 15)) begin
+                if (OutputReady_tb == 1) begin
+                    capture <= 1;
+                    InData_tb <= rommemory[k]; k = k+1;
+                    ord <= ord + 1;
+                end
+            end else if (ord == 15) begin
+                if (OutputReady_tb == 1) begin
+                    capture <= 1;
+                    ord <= 0;
+                end
             end
         end
-
+        
     end
 
 

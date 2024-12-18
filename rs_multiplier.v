@@ -39,7 +39,7 @@ module rs_multiplier #(parameter WIDTH = 32)
         end else if (S == 4) begin
             Out_real = R_imag;
             Out_imag = -R_real;
-        end else if (S == 5) begin
+        end else begin
             Temp_real = ( R_real + R_imag) * 'd181; 
             Temp_imag = (-R_real + R_imag) * 'd181;
             Out_real = Temp_real >>> 8;

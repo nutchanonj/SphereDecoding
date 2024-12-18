@@ -52,14 +52,14 @@ module top #(parameter WIDTH = 32)
     wire        [2:0]           S_2_best;
     wire        [2:0]           S_3_best;
 
-    metric_calc DUT_metric_calc (InData0_real, InData1_real, InData2_real, InData3_real, InData0_imag, InData1_imag, InData2_imag, InData3_imag, S_0, S_1, S_2, S_3, 
+    metric_calc metric_calc (InData0_real, InData1_real, InData2_real, InData3_real, InData0_imag, InData1_imag, InData2_imag, InData3_imag, S_0, S_1, S_2, S_3, 
                      R0_real, R1_real, R2_real, R3_real, R4_real, R5_real, R6_real, R7_real, R8_real, R9_real,
                      R0_imag, R1_imag, R2_imag, R3_imag, R4_imag, R5_imag, R6_imag, R7_imag, R8_imag, R9_imag,
                      current_node_lvl, current_node_cost);
-    defparam DUT_metric_calc.WIDTH = WIDTH;
+    defparam metric_calc.WIDTH = WIDTH;
 
-    dfs DUT_dfs (Clk, ResetInternal, current_node_cost, S_0, S_1, S_2, S_3, OutputReady, S_0_best, S_1_best, S_2_best, S_3_best, current_node_lvl);
-    defparam DUT_dfs.WIDTH = WIDTH;
+    dfs dfs (Clk, ResetInternal, current_node_cost, S_0, S_1, S_2, S_3, OutputReady, S_0_best, S_1_best, S_2_best, S_3_best, current_node_lvl);
+    defparam dfs.WIDTH = WIDTH;
 
     always @(posedge Clk) begin
 

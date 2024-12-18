@@ -131,7 +131,7 @@ module metric_calc #(parameter WIDTH = 32)
             current_node_cost = T2_accum;
         end else if (current_node_lvl == 1) begin
             current_node_cost = T1_accum;
-        end else if (current_node_lvl == 0) begin
+        end else begin
             current_node_cost = T0_accum;
         end
 

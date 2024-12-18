@@ -76,7 +76,6 @@ module dfs #(parameter WIDTH = 32) // Note that this module do an exhaustive dep
             lvl_num[2] <= 0;
             lvl_num[3] <= 0;
             OutputReady <= 0;
-            go_deeper <= 1; // Always go deeper.
         end else begin 
             if (OutputReady == 1) begin
                 OutputReady <= 0;
