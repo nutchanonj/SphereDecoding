@@ -6,4 +6,28 @@ Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/MIMO_detector.v" Line 1. Module MIMO_detector_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 1. Module complex_multiply_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 1. Module complex_multiply_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 1. Module complex_multiply_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 1. Module complex_multiply_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 76. Module accum_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 120. Module PED_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/MIMO_detector.v" Line 1. Module MIMO_detector_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 1. Module complex_multiply_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 1. Module complex_multiply_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 1. Module complex_multiply_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 1. Module complex_multiply_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 76. Module accum_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" Line 120. Module PED_default doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.clk_gen
+Compiling module xil_defaultlib.complex_multiply_default
+Compiling module xil_defaultlib.accum_default
+Compiling module xil_defaultlib.PED_default
+Compiling module xil_defaultlib.MIMO_detector_default
+Compiling module xil_defaultlib.top_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot top_tb_behav

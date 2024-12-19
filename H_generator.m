@@ -92,42 +92,42 @@ BER_ML = sum(abs( bit_received - bit_sent ))/66000;
 
 %% second section.
 
-bit_received_verilog = zeros(1,11*12);
-% Open the file
-fileID = fopen('Data_Out.txt', 'r');
-
-% Check if the file opens successfully
-if fileID == -1
-    error('File cannot be opened. Check file path.');
-end
-
-% Initialize an empty cell array to store each line
-binary1DVector = zeros(1,11*12);
-
-% Read the file line-by-line
-lineIndex = 1;
-while ~feof(fileID)
-    line = fgetl(fileID); % Read one line as a string
-    if ischar(line)       % Check if the line is valid
-        binary1DVector = strcat(binary1DVector, line); % Concatenate each line
-    end
-end
-
-for i = 1:11
-    for j = 1:3
-        bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j + 9 ) - '0';
-    end
-    for j = 4:6
-        bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j + 3) - '0';
-    end
-    for j = 7:9
-        bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j - 3) - '0';
-    end
-    for j = 10:12
-        bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j -9 ) - '0';
-    end
-end
-sum(abs( bit_received_verilog - bit_sent ))
-BER_verilog = sum(abs( bit_received_verilog - bit_sent ))/66000;
-BER_verilog
-
+% bit_received_verilog = zeros(1,11*12);
+% % Open the file
+% fileID = fopen('Data_Out.txt', 'r');
+% 
+% % Check if the file opens successfully
+% if fileID == -1
+%     error('File cannot be opened. Check file path.');
+% end
+% 
+% % Initialize an empty cell array to store each line
+% binary1DVector = zeros(1,11*12);
+% 
+% % Read the file line-by-line
+% lineIndex = 1;
+% while ~feof(fileID)
+%     line = fgetl(fileID); % Read one line as a string
+%     if ischar(line)       % Check if the line is valid
+%         binary1DVector = strcat(binary1DVector, line); % Concatenate each line
+%     end
+% end
+% 
+% for i = 1:11
+%     for j = 1:3
+%         bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j + 9 ) - '0';
+%     end
+%     for j = 4:6
+%         bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j + 3) - '0';
+%     end
+%     for j = 7:9
+%         bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j - 3) - '0';
+%     end
+%     for j = 10:12
+%         bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j -9 ) - '0';
+%     end
+% end
+% sum(abs( bit_received_verilog - bit_sent ))
+% BER_verilog = sum(abs( bit_received_verilog - bit_sent ))/66000;
+% BER_verilog
+% 

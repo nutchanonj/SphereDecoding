@@ -296,6 +296,15 @@ wire [31:0]  constelalation_map [7:0];
 0          = 0000000000000000
 
 */
+//assign constelalation_map [0] = 32'b1111110100101100_1111110100101100;
+//assign constelalation_map [1] = 32'b1111110000000000_0000000000000000;
+//assign constelalation_map [2] = 32'b0000000000000000_0000010000000000;
+//assign constelalation_map [3] = 32'b1111110100101100_0000001011010100;
+//assign constelalation_map [4] = 32'b0000000000000000_1111110000000000;
+//assign constelalation_map [5] = 32'b0000001011010100_1111110100101100;
+//assign constelalation_map [6] = 32'b0000001011010100_0000001011010100;
+//assign constelalation_map [7] = 32'b0000010000000000_0000000000000000;
+
 assign constelalation_map [0] = 32'b1111110000000000_0000000000000000;
 assign constelalation_map [1] = 32'b1111110100101100_0000001011010100;
 assign constelalation_map [2] = 32'b0000000000000000_0000010000000000;
@@ -304,8 +313,6 @@ assign constelalation_map [4] = 32'b0000010000000000_0000000000000000;
 assign constelalation_map [5] = 32'b0000001011010100_1111110100101100;
 assign constelalation_map [6] = 32'b0000000000000000_1111110000000000;
 assign constelalation_map [7] = 32'b1111110100101100_1111110100101100;
-
-
 assign is_leaf_w = curr_level_r == 3;
 
 always@ (*) begin
@@ -441,7 +448,7 @@ always @(posedge Clk) begin
 	best_distance_r <= best_distance_w;
 end
 
-always @(posedge Clk) begin
+always @(posedge Clk) begin 
 	if(curr_state == S_INPUT_Y) begin
 		s0_r <= 0;
 		s1_r <= 0;

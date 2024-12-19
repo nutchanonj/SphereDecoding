@@ -52,23 +52,23 @@ wire signed [WIDTH*2-1:0] mult_bd = fx_mul(imag_a, imag_b);          // 2 sign 2
 wire signed [WIDTH*2-1:0] mult_ad = fx_mul(real_a, imag_b);          // 2 sign 2 bit integer 30 fractional bit
 wire signed [WIDTH*2-1:0] mult_bc = fx_mul(imag_a, real_b);          // 2 sign 2 bit integer 30 fractional bit
 
-reg signed [WIDTH*2-1:0] mult_ac_r;
-reg signed [WIDTH*2-1:0] mult_bd_r;
-reg signed [WIDTH*2-1:0] mult_ad_r;
-reg signed [WIDTH*2-1:0] mult_bc_r;
+//reg signed [WIDTH*2-1:0] mult_ac_r;
+//reg signed [WIDTH*2-1:0] mult_bd_r;
+//reg signed [WIDTH*2-1:0] mult_ad_r;
+//reg signed [WIDTH*2-1:0] mult_bc_r;
 
 always@ (posedge i_clk) begin
-	o_real_data_r <= o_valid_r[0] ? $signed(mult_ac_r) - $signed(mult_bd_r) : o_real_data_r;  // 1 sign 2 bit integer 30 fractional bit 
-	o_imag_data_r <= o_valid_r[0] ? $signed(mult_ad_r) + $signed(mult_bc_r) : o_imag_data_r;  // 1 sign 2 bit integer 30 fractional bit
-	o_valid_r     <= {o_valid_r[0], i_valid};
-	mult_ac_r     <= mult_ac;
-	mult_bd_r     <= mult_bd;
-	mult_ad_r     <= mult_ad;
-	mult_bc_r     <= mult_bc;
+	o_real_data_r <= i_valid ? $signed(mult_ac) - $signed(mult_bd) : o_real_data_r;  // 1 sign 2 bit integer 30 fractional bit 
+	o_imag_data_r <= i_valid ? $signed(mult_ad) + $signed(mult_bc) : o_imag_data_r;  // 1 sign 2 bit integer 30 fractional bit
+	o_valid_r     <= { i_valid};
+//	mult_ac_r     <= mult_ac;
+//	mult_bd_r     <= mult_bd;
+//	mult_ad_r     <= mult_ad;
+//	mult_bc_r     <= mult_bc;
 end
 
 assign o_data = {o_real_data_r, o_imag_data_r};
-assign o_valid = o_valid_r[1];
+assign o_valid = o_valid_r;
 
 endmodule
 
@@ -130,7 +130,7 @@ module PED#(     //parameter WIDTH = 32,
 	output o_valid
 );
 reg [WIDTH*2-1:0]       o_data_r;
-reg	[2:0]               o_valid_r;
+reg	[1:0]               o_valid_r;
 
 wire signed [WIDTH-1:0] real_a = i_in_a[WIDTH*2-1: WIDTH]; 
 wire signed [WIDTH-1:0] imag_a = i_in_a[WIDTH-1 :0];
@@ -143,16 +143,16 @@ wire signed [WIDTH:0] sum_imag = $signed({{1{imag_a[WIDTH-1]}}, imag_a}) - $sign
 
 wire signed [WIDTH*2-1:0] real_square = $signed((o_data_r[WIDTH*2-1:WIDTH]))* $signed((o_data_r[WIDTH*2-1:WIDTH])) ;//+ (o_data_r[WIDTH-1:0])*(o_data_r[WIDTH-1:0]) ;
 wire signed [WIDTH*2-1:0] imag_square = $signed((o_data_r[WIDTH-1:0]))* $signed((o_data_r[WIDTH-1:0])) ;//+ (o_data_r[WIDTH-1:0])*(o_data_r[WIDTH-1:0]) ;
-
+  
 wire signed [WIDTH*2-1:0] abs_square  = real_square + imag_square;
 
 
 always@ (posedge i_clk) begin
-	o_data_r      <= i_valid ? {sum_real[WIDTH-1:0], sum_imag[WIDTH-1:0]} : (o_valid_r[1] ? abs_square[WIDTH*2-INT_W - 1 -:WIDTH] : o_data_r);  // 1 sign 3 bit integer 30 fractional bit
-	o_valid_r     <= {o_valid_r[1:0], i_valid};
+	o_data_r      <= i_valid ? {sum_real[WIDTH-1:0], sum_imag[WIDTH-1:0]} : (o_valid_r[0] ? abs_square[WIDTH*2-INT_W - 1 -:WIDTH] : o_data_r);  // 1 sign 3 bit integer 30 fractional bit
+	o_valid_r     <= {o_valid_r[0], i_valid};
 end
 
 assign o_data  = o_data_r;
-assign o_valid = o_valid_r[2];
+assign o_valid = o_valid_r[1];
 
 endmodule

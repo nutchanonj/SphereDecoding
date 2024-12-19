@@ -13,7 +13,7 @@
 *********************************************************************/
 
 `timescale 1ns/10ps
-`define PERIOD    8.1
+`define PERIOD    8.5
 `define MAX_CYCLE 100000
 `define RST_DELAY 2.0
 `define I_DELAY   4.2
@@ -94,6 +94,7 @@ module top_tb  #(
 				in_valid = 1'b1;
 				inst     = input_data[j][(I_WIDTH*4*2)];
 				idata_a  = input_data[j][(I_WIDTH*4*2) -1:0];
+				$display("[Input: %d data, Simulation Cycle: %6d, Time: %11.2f ns",j, cycle_count, `PERIOD*(cycle_count));
 				j = j+1;
 				//$display("o valid");
 			end else begin
@@ -134,6 +135,7 @@ module top_tb  #(
 					k,
 					odata[11:9], odata[8:6], odata[5:3], odata[2:0]
 				);
+				$display("Simulation Cycle: %6d, Time: %11.2f ns", cycle_count, `PERIOD*(cycle_count));
                 k = k+1;
             end
             @(posedge clk);

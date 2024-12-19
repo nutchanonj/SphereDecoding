@@ -1,0 +1,11 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Study/Digital Communication IC Design/Non/SphereDecoding/MIMO_detector.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MIMO_detector
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Study/Digital Communication IC Design/Non/SphereDecoding/complex_multiply.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module complex_multiply
+INFO: [VRFC 10-311] analyzing module accum
+INFO: [VRFC 10-311] analyzing module PED
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Study/Digital Communication IC Design/Non/SphereDecoding/top_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_tb
+INFO: [VRFC 10-311] analyzing module clk_gen
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Study/Digital Communication IC Design/Non/SphereDecoding/xilinx/MIMO_detector/MIMO_detector.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
