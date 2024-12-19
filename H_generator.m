@@ -2,44 +2,30 @@
 
 clear
 
-fileID = fopen('testbench.mem','w');
+fileID = fopen('data_I.dat','w');
 rng(1)
-bit_sent = randi([0 1],1,66000);
-bit_received = zeros(1,66000);
+bit_sent = randi([0 1],1,12*11);
+bit_received = zeros(1,12*11);
 
-for p = 1:500
+for p = 1:1
     rng(p)
     H = normrnd(0,0.5,[4,4]) + 1i*normrnd(0,0.5,[4,4]);
     [Q,R] = qr(H);
-    Q_shift = round(Q*(2^16));
-    R_shift = round(R*(2^16));
-
-    R_shift_11_real = dec2hex(real(R_shift(1,1)),8);
-    R_shift_11_imag = dec2hex(imag(R_shift(1,1)),8);
-    R_shift_12_real = dec2hex(real(R_shift(1,2)),8);
-    R_shift_12_imag = dec2hex(imag(R_shift(1,2)),8);
-    R_shift_13_real = dec2hex(real(R_shift(1,3)),8);
-    R_shift_13_imag = dec2hex(imag(R_shift(1,3)),8);
-    R_shift_14_real = dec2hex(real(R_shift(1,4)),8);
-    R_shift_14_imag = dec2hex(imag(R_shift(1,4)),8);
-    R_shift_22_real = dec2hex(real(R_shift(2,2)),8);
-    R_shift_22_imag = dec2hex(imag(R_shift(2,2)),8);
-    R_shift_23_real = dec2hex(real(R_shift(2,3)),8);
-    R_shift_23_imag = dec2hex(imag(R_shift(2,3)),8);
-    R_shift_24_real = dec2hex(real(R_shift(2,4)),8);
-    R_shift_24_imag = dec2hex(imag(R_shift(2,4)),8);
-    R_shift_33_real = dec2hex(real(R_shift(3,3)),8);
-    R_shift_33_imag = dec2hex(imag(R_shift(3,3)),8);
-    R_shift_34_real = dec2hex(real(R_shift(3,4)),8);
-    R_shift_34_imag = dec2hex(imag(R_shift(3,4)),8);
-    R_shift_44_real = dec2hex(real(R_shift(4,4)),8);
-    R_shift_44_imag = dec2hex(imag(R_shift(4,4)),8);
-    empty = dec2hex(0,8);
-
-    fprintf(fileID,"%s%s%s%s%s%s%s%s\n",R_shift_14_imag,R_shift_14_real,R_shift_13_imag,R_shift_13_real,R_shift_12_imag,R_shift_12_real,R_shift_11_imag,R_shift_11_real);
-    fprintf(fileID,"%s%s%s%s%s%s%s%s\n",R_shift_33_imag,R_shift_33_real,R_shift_24_imag,R_shift_24_real,R_shift_23_imag,R_shift_23_real,R_shift_22_imag,R_shift_22_real);
-    fprintf(fileID,"%s%s%s%s%s%s%s%s\n",empty,empty,empty,empty,R_shift_44_imag,R_shift_44_real,R_shift_34_imag,R_shift_34_real);
-
+    Q_shift = Q;%round(Q*(2^0));
+    R_shift = R;%round(R*(2^0));
+    for i = 1:4
+        fprintf(fileID,"1");
+        for j = 1:4
+            Rij = fi(real(R_shift(i,j)),1,16,10,'RoundingMethod','Nearest');
+            Rij = bin(Rij);
+            fprintf(fileID,"%s", Rij);
+            Rij = fi(imag(R_shift(i,j)),1,16,10,'RoundingMethod','Nearest');
+            Rij = bin(Rij);
+            fprintf(fileID,"%s", Rij);
+        end
+        fprintf(fileID,"\n");
+    end
+ 
     code = [1, 0.707+0.707i, 1i, -0.707+0.707i, -1, -0.707-0.707i, -1i, 0.707-0.707i];
 
     x = zeros(4,4096);
@@ -65,27 +51,26 @@ for p = 1:500
         x_sent = code(x_sent_num+1).';
         y_sent = H*x_sent;
         sigpower = pow2db(mean(abs(x_sent).^2));
-        snr = 19;
+        snr = 10;
         y_received = awgn(y_sent,snr,sigpower,p);
     
         y_received_R = Q' * y_received;
-        y_received_R_shift = round(y_received_R*(2^16));
+        y_received_R_shift = y_received_R;%round(y_received_R*(2^16));
+        fprintf(fileID,"0");
+        for i = 1:4
+            In_0_real = fi(real(y_received_R_shift(i)),1,16,10,'RoundingMethod','Nearest');
+            In_0_real = bin(In_0_real);
+            fprintf(fileID,"%s", In_0_real);
+            In_0_imag = fi(imag(y_received_R_shift(i)),1,16,10,'RoundingMethod','Nearest');
+            In_0_imag = bin(In_0_imag);
+            fprintf(fileID,"%s", In_0_imag);
+        end
+        fprintf(fileID,"\n");
 
-        In_0_real = dec2hex(real(y_received_R_shift(1)),8);
-        In_0_imag = dec2hex(imag(y_received_R_shift(1)),8);
-        In_1_real = dec2hex(real(y_received_R_shift(2)),8);
-        In_1_imag = dec2hex(imag(y_received_R_shift(2)),8);
-        In_2_real = dec2hex(real(y_received_R_shift(3)),8);
-        In_2_imag = dec2hex(imag(y_received_R_shift(3)),8);
-        In_3_real = dec2hex(real(y_received_R_shift(4)),8);
-        In_3_imag = dec2hex(imag(y_received_R_shift(4)),8);
-
-        fprintf(fileID,"%s%s%s%s%s%s%s%s\n",In_3_imag,In_2_imag,In_1_imag,In_0_imag,In_3_real,In_2_real,In_1_real,In_0_real);
-    
         gamma = sum(abs(y_received - H*x).^2,1);
         [gamma_min,gamma_min_index] = min(gamma);
         x_ML = x(:,gamma_min_index);
-        x_ML_num = psk8decode(x_ML);
+        x_ML_num = psk8decode(x_ML)
 
         for r = 1:4
             x_ML_bit = psk8decode_bit(x_ML_num(r));
@@ -94,7 +79,7 @@ for p = 1:500
 
     end
 end
-
+sum(abs( bit_received - bit_sent ))
 BER_ML = sum(abs( bit_received - bit_sent ))/66000;
 
 %figure(1)
@@ -107,15 +92,42 @@ BER_ML = sum(abs( bit_received - bit_sent ))/66000;
 
 %% second section.
 
-bit_received_verilog = zeros(1,66000);
-Data_Out = readmatrix("Data_Out_SNR19.txt");
-for i = 1:5500
-    for j = 1:12
-        bit_received_verilog(12*(i-1)+12+1-j) = mod(Data_Out(i),10);
-        Data_Out(i) = floor(Data_Out(i)/10);
+bit_received_verilog = zeros(1,11*12);
+% Open the file
+fileID = fopen('Data_Out.txt', 'r');
+
+% Check if the file opens successfully
+if fileID == -1
+    error('File cannot be opened. Check file path.');
+end
+
+% Initialize an empty cell array to store each line
+binary1DVector = zeros(1,11*12);
+
+% Read the file line-by-line
+lineIndex = 1;
+while ~feof(fileID)
+    line = fgetl(fileID); % Read one line as a string
+    if ischar(line)       % Check if the line is valid
+        binary1DVector = strcat(binary1DVector, line); % Concatenate each line
     end
 end
 
+for i = 1:11
+    for j = 1:3
+        bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j + 9 ) - '0';
+    end
+    for j = 4:6
+        bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j + 3) - '0';
+    end
+    for j = 7:9
+        bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j - 3) - '0';
+    end
+    for j = 10:12
+        bit_received_verilog((i-1)*12 + j ) = binary1DVector((i-1)*12 + j -9 ) - '0';
+    end
+end
+sum(abs( bit_received_verilog - bit_sent ))
 BER_verilog = sum(abs( bit_received_verilog - bit_sent ))/66000;
-
+BER_verilog
 
