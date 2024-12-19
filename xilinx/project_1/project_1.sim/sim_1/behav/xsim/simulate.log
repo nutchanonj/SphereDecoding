@@ -1,0 +1,19 @@
+Time resolution is 1 ps
+Test[          0]: Data out=5 0 0 2 
+Test[          1]: Data out=5 1 5 2 
+Test[          2]: Data out=6 1 1 6 
+Test[          3]: Data out=2 2 7 6 
+Test[          4]: Data out=3 1 4 0 
+Test[          5]: Data out=6 7 1 1 
+Test[          6]: Data out=6 7 2 2 
+Test[          7]: Data out=4 2 7 2 
+Test[          8]: Data out=5 5 5 6 
+Test[          9]: Data out=6 3 3 6 
+Test[         10]: Data out=3 6 3 0 
+----------------------------------------------
+-                 ALL PASS!                  -
+----------------------------------------------
+Simulation Cycle:  44471, Time:   373556.40 ns
+$finish called at time : 373590 ns : File "D:/Study/Digital Communication IC Design/SphereDecoding/top_tb.v" Line 173
+Error! Runtime exceeded!
+$finish called at time : 840016800 ps : File "D:/Study/Digital Communication IC Design/SphereDecoding/top_tb.v" Line 194
