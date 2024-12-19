@@ -13,7 +13,5 @@ Test[         10]: Data out=3 6 3 0
 ----------------------------------------------
 -                 ALL PASS!                  -
 ----------------------------------------------
-Simulation Cycle:  44471, Time:   373556.40 ns
-$finish called at time : 373590 ns : File "D:/Study/Digital Communication IC Design/SphereDecoding/top_tb.v" Line 173
-Error! Runtime exceeded!
-$finish called at time : 840016800 ps : File "D:/Study/Digital Communication IC Design/SphereDecoding/top_tb.v" Line 194
+Simulation Cycle:  41881, Time:   351800.40 ns
+$finish called at time : 351834 ns : File "D:/Study/Digital Communication IC Design/SphereDecoding/top_tb.v" Line 173

@@ -13,7 +13,7 @@
 *********************************************************************/
 
 `timescale 1ns/10ps
-`define PERIOD    8.4
+`define PERIOD    8.1
 `define MAX_CYCLE 100000
 `define RST_DELAY 2.0
 `define I_DELAY   4.2

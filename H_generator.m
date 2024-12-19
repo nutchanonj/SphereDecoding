@@ -25,7 +25,7 @@ for p = 1:1
         end
         fprintf(fileID,"\n");
     end
- 
+
     code = [1, 0.707+0.707i, 1i, -0.707+0.707i, -1, -0.707-0.707i, -1i, 0.707-0.707i];
 
     x = zeros(4,4096);
@@ -51,7 +51,7 @@ for p = 1:1
         x_sent = code(x_sent_num+1).';
         y_sent = H*x_sent;
         sigpower = pow2db(mean(abs(x_sent).^2));
-        snr = 10;
+        snr = 19;
         y_received = awgn(y_sent,snr,sigpower,p);
     
         y_received_R = Q' * y_received;
