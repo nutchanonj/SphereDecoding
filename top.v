@@ -183,37 +183,24 @@ end
 
 
 generate
-    for (i = 0; i < 3; i = i + 1) begin
+    for (i = 0; i < 4; i = i + 1) begin
         always @(*) begin
             if (i == curr_level_r) begin
                 case(curr_state)
-                    ///S_DFS_COMPARE       : checking_w[i] = checking_r[curr_level_r+1] == 8 ? 1 ;
-					S_DFS_COMPARE          : checking_w[i] = checking_r[i] + 1;// ?  checking_r[i] + 1 :  checking_r[i];
+					S_DFS_COMPARE          : checking_w[i] = checking_r[i] + 1;
 					S_DFS_ENTRY            : checking_w[i] = checking_r[i][3]? 0 :  checking_r[i];
-					//S_DFS_TRANVERSE_BW  : checking_w[i] = checking_r[curr_level_r] + 1;
 					default                : checking_w[i] = checking_r[i];
                 endcase
             end else begin
 				case(curr_state)
-                    ///S_DFS_COMPARE       : checking_w[i] = checking_r[curr_level_r+1] == 8 ? 1 ;
 					S_INPUT_Y              : checking_w[i] = 0;
-					//S_DFS_COMPARE          : checking_w[i] = checking_w[i+1] == 8  ? checking_r[i] + 1 : checking_r[i];
 					default                : checking_w[i] = checking_r[i];
                 endcase
             end
         end
     end
 endgenerate 
-always @(*) begin
-	if (curr_level_r == 3) begin
-		case(curr_state)
-			S_DFS_COMPARE          : checking_w[3] = checking_r[curr_level_r] + 1;
-			S_DFS_ENTRY            : checking_w[3] = checking_r[curr_level_r][3]? 0 :  + checking_r[3];
-			default                : checking_w[3] = checking_r[curr_level_r];
-		endcase
-	end else
-		checking_w[3] = curr_level_r != 3 ? 0 : checking_r[3];
-end
+
 /******************************/
 /*  S_DFS_COMPUTE             */
 /******************************/

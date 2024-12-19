@@ -13,10 +13,10 @@
 *********************************************************************/
 
 `timescale 1ns/10ps
-`define PERIOD    8.5
+`define PERIOD    8.4
 `define MAX_CYCLE 100000
 `define RST_DELAY 2.0
-`define I_DELAY   4.25
+`define I_DELAY   4.2
 `define IDATA  "data_I.dat"
 
 `define PAT_LEN 15 

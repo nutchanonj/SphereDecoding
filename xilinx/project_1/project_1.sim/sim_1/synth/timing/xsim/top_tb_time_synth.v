@@ -2,7 +2,7 @@
 // Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-// Date        : Thu Dec 19 11:54:24 2024
+// Date        : Thu Dec 19 12:24:43 2024
 // Host        : DESKTOP-GAHC48P running 64-bit major release  (build 9200)
 // Command     : write_verilog -mode timesim -nolib -sdf_anno true -force -file {D:/Study/Digital Communication IC
 //               Design/SphereDecoding/xilinx/project_1/project_1.sim/sim_1/synth/timing/xsim/top_tb_time_synth.v}
