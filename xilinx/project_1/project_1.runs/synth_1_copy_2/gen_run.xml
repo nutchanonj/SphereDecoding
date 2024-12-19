@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1_copy_2" LaunchPart="xc7z010clg400-1" LaunchTime="1734556117" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/top.dcp">
+<GenRun Id="synth_1_copy_2" LaunchPart="xc7z010clg400-1" LaunchTime="1734557912" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/top.dcp">
   <File Type="PA-TCL" Name="MIMO_detector.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="MIMO_detector_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="MIMO_detector_reports.tcl"/>
   <File Type="RDS-RDS" Name="MIMO_detector.vds"/>
   <File Type="RDS-UTIL" Name="MIMO_detector_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="MIMO_detector_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="MIMO_detector.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="MIMO_detector_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="MIMO_detector_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../../metric_calc.v">
@@ -61,9 +58,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Flow_PerfOptimized_high" Flow="Vivado Synthesis 2023">
-      <Desc>Higher performance designs, resource sharing is turned off, the global fanout guide is set to a lower number, FSM extraction forced to one-hot, LUT combining is disabled, equivalent registers are preserved, SRL are inferred  with a larger threshold</Desc>
-    </StratHandle>
+    <StratHandle Name="Flow_PerfOptimized_high" Flow="Vivado Synthesis 2023"/>
     <Step Id="synth_design">
       <Option Id="Directive">9</Option>
       <Option Id="FsmExtraction">1</Option>

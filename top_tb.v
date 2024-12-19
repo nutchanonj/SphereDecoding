@@ -13,12 +13,12 @@
 *********************************************************************/
 
 `timescale 1ns/10ps
-`define PERIOD    5.0
+`define PERIOD    8.5
 `define MAX_CYCLE 100000
 `define RST_DELAY 2.0
-
+`define I_DELAY   4.25
 `define IDATA  "data_I.dat"
-`define ODATA  "../00_TESTBED/pattern/data_O.dat"
+
 `define PAT_LEN 15 
 
 
@@ -86,24 +86,24 @@ module top_tb  #(
         // start
 		// loop
         i = 0; j = 0;
-        @(negedge clk);
+        @(posedge clk);
         while ( j <= `PAT_LEN) begin
-            @(negedge clk);
+            @(posedge clk);
 			if (out_in_ready) begin
-			 //#(`PERIOD/2);
+			#(`PERIOD / 2.0)
 				in_valid = 1'b1;
 				inst     = input_data[j][(I_WIDTH*4*2)];
 				idata_a  = input_data[j][(I_WIDTH*4*2) -1:0];
 				j = j+1;
 				//$display("o valid");
 			end else begin
-			    #(`PERIOD/2);
+			#(`PERIOD / 2.0)
 				in_valid = 1'b0;
 			end
         end
 
         // final
-        @(negedge clk);
+        @(posedge clk);
         //#(`PERIOD/2);
         idata_a  = 0;
         inst     = 0;
@@ -136,7 +136,7 @@ module top_tb  #(
 				);
                 k = k+1;
             end
-            @(negedge clk);
+            @(posedge clk);
         end
 
         // final
@@ -190,6 +190,7 @@ module clk_gen (
         rst = 1'b1; rst_n = 1'b0; #((`RST_DELAY - 0.25) * `PERIOD);
         rst = 1'b0; rst_n = 1'b1; #(         `MAX_CYCLE * `PERIOD);
         $display("Error! Runtime exceeded!");
+        
         $finish;
     end
 

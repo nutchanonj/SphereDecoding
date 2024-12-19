@@ -1,4 +1,0 @@
-Time resolution is 1 ps
-WARNING: File data_I.dat referenced on D:/Study/Digital Communication IC Design/Non/SphereDecoding/metric_calc.v at line 155 cannot be opened for reading. Please ensure that this file is available in the current working directory or parent directory of xsim.dir location specified via -xsimdir switch.
-Error! Runtime exceeded!
-$finish called at time : 500010 ns : File "D:/Study/Digital Communication IC Design/Non/SphereDecoding/top_tb.v" Line 193
