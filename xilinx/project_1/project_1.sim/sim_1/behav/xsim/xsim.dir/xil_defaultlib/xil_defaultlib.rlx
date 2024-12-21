@@ -1,8 +1,0 @@
-0.7
-2020.2
-Oct 13 2023
-20:47:58
-D:/Study/Digital Communication IC Design/SphereDecoding/MIMO_detector.v,1734591244,verilog,,D:/Study/Digital Communication IC Design/SphereDecoding/complex_multiply.v,,MIMO_detector,,,,,,,,
-D:/Study/Digital Communication IC Design/SphereDecoding/complex_multiply.v,1734591262,verilog,,D:/Study/Digital Communication IC Design/SphereDecoding/top_tb.v,,PED;accum;complex_multiply,,,,,,,,
-D:/Study/Digital Communication IC Design/SphereDecoding/top_tb.v,1734591563,verilog,,,,clk_gen;top_tb,,,,,,,,
-D:/Study/Digital Communication IC Design/SphereDecoding/xilinx/project_1/project_1.sim/sim_1/behav/xsim/glbl.v,1734010363,verilog,,,,glbl,,,,,,,,

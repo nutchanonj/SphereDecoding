@@ -1,0 +1,43 @@
+Time resolution is 1 ps
+[Input:           0 data, Simulation Cycle:      3, Time:       25.50 ns
+[Input:           1 data, Simulation Cycle:      4, Time:       34.00 ns
+[Input:           2 data, Simulation Cycle:      5, Time:       42.50 ns
+[Input:           3 data, Simulation Cycle:      6, Time:       51.00 ns
+[Input:           4 data, Simulation Cycle:      7, Time:       59.50 ns
+Test[          0]: Data out=5 0 0 2 
+Simulation Cycle:   3607, Time:    30659.50 ns
+[Input:           5 data, Simulation Cycle:   3609, Time:    30676.50 ns
+Test[          1]: Data out=5 1 5 2 
+Simulation Cycle:   5759, Time:    48951.50 ns
+[Input:           6 data, Simulation Cycle:   5761, Time:    48968.50 ns
+Test[          2]: Data out=6 1 1 6 
+Simulation Cycle:   6635, Time:    56397.50 ns
+[Input:           7 data, Simulation Cycle:   6637, Time:    56414.50 ns
+Test[          3]: Data out=2 2 7 6 
+Simulation Cycle:   8381, Time:    71238.50 ns
+[Input:           8 data, Simulation Cycle:   8383, Time:    71255.50 ns
+Test[          4]: Data out=3 1 4 0 
+Simulation Cycle:   8967, Time:    76219.50 ns
+[Input:           9 data, Simulation Cycle:   8969, Time:    76236.50 ns
+Test[          5]: Data out=6 7 1 1 
+Simulation Cycle:  10713, Time:    91060.50 ns
+[Input:          10 data, Simulation Cycle:  10715, Time:    91077.50 ns
+Test[          6]: Data out=6 7 2 2 
+Simulation Cycle:  12633, Time:   107380.50 ns
+[Input:          11 data, Simulation Cycle:  12635, Time:   107397.50 ns
+Test[          7]: Data out=4 2 7 2 
+Simulation Cycle:  15133, Time:   128630.50 ns
+[Input:          12 data, Simulation Cycle:  15135, Time:   128647.50 ns
+Test[          8]: Data out=5 5 5 6 
+Simulation Cycle:  17923, Time:   152345.50 ns
+[Input:          13 data, Simulation Cycle:  17925, Time:   152362.50 ns
+Test[          9]: Data out=6 3 3 6 
+Simulation Cycle:  19321, Time:   164228.50 ns
+[Input:          14 data, Simulation Cycle:  19323, Time:   164245.50 ns
+Test[         10]: Data out=3 6 3 0 
+Simulation Cycle:  20371, Time:   173153.50 ns
+----------------------------------------------
+-                 ALL PASS!                  -
+----------------------------------------------
+Simulation Cycle:  20371, Time:   173153.50 ns
+$finish called at time : 173187500 ps : File "D:/Study/Digital Communication IC Design/Non/SphereDecoding/top_tb.v" Line 175

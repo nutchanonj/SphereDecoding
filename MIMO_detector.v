@@ -56,16 +56,14 @@ wire  input_R_valid_w;
 wire  input_Y_valid_w;
 
 reg   [2:0]           curr_level_w         ;   // 4 levels
-reg   [2:0]           curr_node_w     [4:0];   // 4 levels with 0-7 value
-reg   [WIDTH:0]       curr_distance_w [4:0];   // 4 levels with PED
-reg   [3:0]           checking_w [4:0];         // 4 levels with 8 flag
+reg   [WIDTH:0]       curr_distance_w [3:0];   // 4 levels with PED
+reg   [3:0]           checking_w [3:0];         // 4 levels with 8 flag
 reg   [WIDTH  :0]     best_distance_w      ;   // best_distance_w
 reg   [WIDTH*2:0]     best_candidate_w      ;   // best_distance_w
 
 reg   [2:0]           curr_level_r         ;   // 4 levels
-reg   [2:0]           curr_node_r     [4:0];   // 4 levels with 0-7
-reg   [WIDTH:0]       curr_distance_r [4:0];   // 4 levels with PED
-reg   [3:0]           checking_r [4:0];         // 4 levels with 8 flag
+reg   [WIDTH:0]       curr_distance_r [3:0];   // 4 levels with PED
+reg   [3:0]           checking_r [3:0];         // 4 levels with 8 flag
 reg   [WIDTH  :0]     best_distance_r      ;   // best_distance_r
 reg   [WIDTH*2:0]     best_candidate_r      ;   // best_distance_r
 
@@ -259,7 +257,7 @@ PED PED_inst(.i_clk  (Clk),
 assign can_tranverse_w = !curr_level_r[2] && checking_r[curr_level_r+1] != 8;
 
 generate
-    for (i = 0; i < 5; i = i + 1) begin
+    for (i = 0; i < 4; i = i + 1) begin
 		always@ (*) begin
 			if (i == curr_level_r) begin
 				case(curr_state)

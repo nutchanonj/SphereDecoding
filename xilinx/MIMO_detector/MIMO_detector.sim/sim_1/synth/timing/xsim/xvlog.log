@@ -1,1 +1,6 @@
-ERROR: [XSIM 43-4316] Can not find file: ../../../../../../MIMO_detector.v
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Study/Digital Communication IC Design/Non/SphereDecoding/xilinx/MIMO_detector/MIMO_detector.sim/sim_1/synth/timing/xsim/top_tb_time_synth.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module MIMO_detector
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/Study/Digital Communication IC Design/Non/SphereDecoding/top_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_tb
+INFO: [VRFC 10-311] analyzing module clk_gen
