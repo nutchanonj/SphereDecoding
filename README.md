@@ -12,8 +12,11 @@ Implementation of Sphere Decoding on Verilog
 - All the BER data are gathered in `performance_L2.xlsx` and plotted later by importing that file into the `plot_compare_L2.m`.
 - `H_generator_TA.m` (first section) and `H_and_R.mat` is used to generate the file `data_I.dat` to be used in the testbench `top_tb.v` for latency and throughput measurement.
 - The constant variable `H_LEN` in `top_tb.v` and the variable `H_num` in `H_generator.m` should be the same for the same simulation setting.
-- The old version of implementation that uses L1-norm is also provide in sub-folder L1-norm. The differences are
-  - The hardware verilog design sources are consisted of `MIMO_detector.v` and `complex_multiply.v`. 
+- The old version of implementation that uses L1-norm is also provide in sub-folder L1-norm. The differences from the final implementation are
+  - The hardware verilog design sources are consisted of `top.v`, `dfs_exhaust.v`, `metric_calc.v`, `rs_multiplier.v`, and `abs.v`.
+  - `data_I.dat` --> `testbench.mem`
+  - `performance_L2.xlsx` --> `performance_L1.xlsx`
+  - `plot_compare_L2.m` --> `plot_compare_L1.m`
 
 
 
