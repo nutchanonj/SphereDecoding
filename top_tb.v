@@ -1,15 +1,17 @@
 /********************************************************************
-* Filename: testbench_mod_add.v
+* Filename: top_tb.v
 * Authors:
 *     Khoa Tran
+*     Nutchanon Jariyanurut
 * Description:
-*     testbench for modular addition/substraction
+*     testbench
 * Parameters:
 *
 * Note:
 *
 * Review History:
-*     2024.12.05             Khoa Tran
+*     2024.12.05             Khoa Tran (First version.)
+*     2024.12.21             Nutchanon Jariyanurut (To simulate multiple H matrices.)
 *********************************************************************/
 
 `timescale 1ns/10ps
@@ -20,6 +22,7 @@
 `define IDATA  "data_I.dat"
 
 `define PAT_LEN 15 
+`define H_LEN 1
 
 
 module top_tb  #(
@@ -31,6 +34,7 @@ module top_tb  #(
 
     // Ports
     wire              clk;
+    wire              rst;
     wire              rst_n;
     reg               in_valid;
     reg  [0:0]        inst;
@@ -40,14 +44,14 @@ module top_tb  #(
     wire              busy;
     wire              out_valid;
 	wire              out_in_ready;
-    wire [(12)-1:0]     odata;
+    wire [(12)-1:0]   odata;
 
     // TB variables
-    reg  [(I_WIDTH*4*2)  :0]    input_data  [0:`PAT_LEN-1];
+    reg  [(I_WIDTH*4*2)  :0]    input_data  [0:(`PAT_LEN*`H_LEN)-1];
     //reg  [(I_WIDTH*4*2)-1:0]    golden_data [0:`PAT_LEN-1];
 
     integer input_end, output_end, test_end;
-    integer i, j, k;
+    integer j, k, H_num;
     integer correct, error, cycle_count;
 	integer FILE;
     initial begin
@@ -56,10 +60,12 @@ module top_tb  #(
         //$readmemb(`ODATA, golden_data);
     end
 
+    
     clk_gen u_clk_gen (
         .clk   (clk  ),
         .rst   (rst  ),
-        .rst_n (rst_n)
+        .rst_n (rst_n),
+        .k     (k    )
     );
 	
 	MIMO_detector MIMO_detector_inst (
@@ -85,30 +91,38 @@ module top_tb  #(
 
         // start
 		// loop
-        i = 0; j = 0;
-        @(posedge clk);
-        while ( j <= `PAT_LEN) begin
+        j = 0; H_num = 0;
+        while (H_num <= `H_LEN) begin
             @(posedge clk);
-			if (out_in_ready) begin
-			#(`PERIOD / 2.0)
-				in_valid = 1'b1;
-				inst     = input_data[j][(I_WIDTH*4*2)];
-				idata_a  = input_data[j][(I_WIDTH*4*2) -1:0];
-				$display("[Input: %d data, Simulation Cycle: %6d, Time: %11.2f ns",j, cycle_count, `PERIOD*(cycle_count));
-				j = j+1;
-				//$display("o valid");
-			end else begin
-			#(`PERIOD / 2.0)
-				in_valid = 1'b0;
-			end
+            while (j <= `PAT_LEN) begin
+                @(posedge clk);
+                if (out_in_ready) begin
+                #(`PERIOD / 2.0)
+                    in_valid = 1'b1;
+                    inst     = input_data[H_num*15+j][(I_WIDTH*4*2)];
+                    idata_a  = input_data[H_num*15+j][(I_WIDTH*4*2) -1:0];
+                    $display("[Input: %d data, Simulation Cycle: %6d, Time: %11.2f ns",j, cycle_count, `PERIOD*(cycle_count + 2.5));
+                    j = j+1;
+                    //$display("o valid");
+                end else begin
+                #(`PERIOD / 2.0)
+                    in_valid = 1'b0;
+                end
+            end
+            // final
+            @(posedge clk);
+            //#(`PERIOD/2);
+            idata_a  = 0;
+            inst     = 0;
+            in_valid = 1'b0;
+
+            H_num = H_num+1; j = 0; 
+            wait (rst === 1'b1);
+            in_valid =  1'b0;
+            idata_a  = 255'd0;
+            wait (rst === 1'b0);
         end
 
-        // final
-        @(posedge clk);
-        //#(`PERIOD/2);
-        idata_a  = 0;
-        inst     = 0;
-        in_valid = 1'b0;
     end
 
     // Output
@@ -126,19 +140,22 @@ module top_tb  #(
 
         // loop
         k = 0;
-        while (k < `PAT_LEN - 4) begin
-            @(negedge clk);
-            if (out_valid) begin
-                $fdisplay(FILE, "%b", odata); // save output 
-				$display(
-					"Test[%d]: Data out=%d %d %d %d ",
-					k,
-					odata[11:9], odata[8:6], odata[5:3], odata[2:0]
-				);
-				$display("Simulation Cycle: %6d, Time: %11.2f ns", cycle_count, `PERIOD*(cycle_count));
-                k = k+1;
+        while (H_num <= `H_LEN) begin
+            while (k < `PAT_LEN - 4) begin
+                @(negedge clk);
+                if (out_valid) begin
+                    $fdisplay(FILE, "%b", odata); // save output 
+                    $display(
+                        "Test[%d]: Data out=%d %d %d %d ",
+                        k,
+                        odata[11:9], odata[8:6], odata[5:3], odata[2:0]
+                    );
+                    $display("Simulation Cycle: %6d, Time: %11.2f ns", cycle_count, `PERIOD*(cycle_count + 1.5));
+                    k = k+1;
+                end
+                @(posedge clk);
             end
-            @(posedge clk);
+            k = 0; 
         end
 
         // final
@@ -156,9 +173,10 @@ module top_tb  #(
     end
     // Result
     initial begin
-        wait (k === `PAT_LEN - 4);
+        wait (H_num === `H_LEN);
 
-        if (error === 0 && k === `PAT_LEN - 4) begin
+        /*
+        if (error === 0 && H_num === `H_LEN) begin
             $display("----------------------------------------------");
             $display("-                 ALL PASS!                  -");
             $display("----------------------------------------------");
@@ -169,11 +187,14 @@ module top_tb  #(
             $display("  Wrong! Total Error: %d                      ", error);
             $display("----------------------------------------------");
         end
+        */
+
 		$display("Simulation Cycle: %6d, Time: %11.2f ns", cycle_count, `PERIOD*(cycle_count));
         # (2 * `PERIOD);
         $fclose(FILE);
         $finish;
     end
+
 
 endmodule
 
@@ -181,7 +202,8 @@ endmodule
 module clk_gen (
     output reg clk,
     output reg rst,
-    output reg rst_n
+    output reg rst_n,
+    input wire [31:0] k
 );
 
     always #(`PERIOD / 2.0) clk = ~clk;
@@ -190,10 +212,15 @@ module clk_gen (
         clk = 1'b0;
         rst = 1'b0; rst_n = 1'b1; #(              0.25  * `PERIOD);
         rst = 1'b1; rst_n = 1'b0; #((`RST_DELAY - 0.25) * `PERIOD);
-        rst = 1'b0; rst_n = 1'b1; #(         `MAX_CYCLE * `PERIOD);
-        $display("Error! Runtime exceeded!");
-        
-        $finish;
+        rst = 1'b0; rst_n = 1'b1; 
+    end
+
+    always @* begin
+        if (k === `PAT_LEN - 4) begin
+            rst = 1'b0; rst_n = 1'b1; #(              1.25  * `PERIOD);
+            rst = 1'b1; rst_n = 1'b0; #((`RST_DELAY - 0.25) * `PERIOD);
+            rst = 1'b0; rst_n = 1'b1; 
+        end
     end
 
 endmodule
