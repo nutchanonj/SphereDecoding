@@ -10,7 +10,7 @@ Implementation of Sphere Decoding on Verilog
 - The hardware verilog simulation source is `top_tb.v`. It uses input data `data_I.dat` and then outputs data `Data_out.txt`
 - the output data `Data_out.txt` will be used in `H_generator.m` (second section) to generate the bit error rate (BER) of our hardware implementation `BER_verilog`.
 - `H_generator_TA.m` (first section) and `H_and_R.mat` is used to generate the file `data_I.dat` to be used in the testbench `top_tb.v` for latency and throughput measurement.
-- 
+- The constant variable `H_LEN` in `top_tb.v` and the variable `H_num` in `H_generator.m` should be the same for the same simulation setting.
 
 
 
